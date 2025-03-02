@@ -1,0 +1,27 @@
+services:
+  postgres:
+    image: postgres:17.4
+    ports:
+      - ${DB_PORT}:5432
+    volumes:
+      - ~/apps/postgres:/var/lib/postgresql/data
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_PASSWORD=${DB_PASS}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_DB=${DB_NAME}
+  game_api:
+    build: .
+    image: game_api:latest
+    container_name: game_api
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+    environment:
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
+      DEBUG: ${DEBUG}
+
+    env_file:
+      - .env
