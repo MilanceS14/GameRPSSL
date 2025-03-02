@@ -34,7 +34,7 @@ the chances of a tie.
 
 ## How to run
 
-Game API is dockerized, which means that running it is really easy! Just follow this steps:
+Game API is dockerized, which means that running it is really easy! Just follow these steps:
 
 1. Add .env file, that contains needed environment variables
 

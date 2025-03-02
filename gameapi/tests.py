@@ -61,9 +61,18 @@ def test_get_result_from_bool(result, expected):
 
 @pytest.mark.django_db
 def test_find_game_by_player_uuid():
-    game_1 = MultiplayerGameFactory()
-    game_2 = MultiplayerGameFactory()
-    game_3 = MultiplayerGameFactory()
+    game_1 = MultiplayerGameFactory(
+        player_1_uuid=uuid.uuid4(), player_2_uuid=uuid.uuid4()
+    )
+    game_2 = MultiplayerGameFactory(
+        player_1_uuid=uuid.uuid4(), player_2_uuid=uuid.uuid4()
+    )
+    game_3 = MultiplayerGameFactory(
+        player_1_uuid=uuid.uuid4(), player_2_uuid=uuid.uuid4()
+    )
+    game_1.save()
+    game_2.save()
+    game_3.save()
 
     # uuid that doesn't exist
     found_game = find_game_by_player_uuid(uuid.uuid4())
