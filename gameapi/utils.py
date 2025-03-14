@@ -1,11 +1,9 @@
 import random
 import uuid
 
-import requests
 from django.db.models import Q
 
-from GameRPSSL.settings import env
-from gameapi.constants import GameChoices, Result, id_to_choice
+from gameapi.constants import GameChoices, Result
 from gameapi.models import MultiplayerGame
 
 win_transition = {
@@ -35,15 +33,7 @@ def get_result_from_bool(result: bool | None) -> Result:
 
 
 def get_random_choice() -> GameChoices:
-    try:
-        url = env("RANDOM_NUMBER_GENERATOR_URL")
-        response = requests.get(url)
-        random_number = response.json()["random_number"]
-        # To get a valid id, we need to divide my modulo, and add 1, since IDs start from 1, and modulo can return 0
-        choice_id = random_number % len(id_to_choice) + 1
-        return id_to_choice[choice_id]
-    except Exception:
-        return random.choice(list(win_transition.keys()))
+    return random.choice(list(win_transition.keys()))
 
 
 def find_game_by_player_uuid(player_uuid: uuid.UUID) -> MultiplayerGame | None:

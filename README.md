@@ -47,8 +47,6 @@ DB_PORT=5432
 
 DJANGO_SECRET_KEY=django-insecure-4^4%0^8djj@i#^=bzxh=)0v-xd&$5*rm1#l&cos@z7#tyujj4t
 DEBUG=False
-
-RANDOM_NUMBER_GENERATOR_URL=https://codechallenge.boohma.com/random
 ```
 
 2. Run `docker compose build` to build needed images
